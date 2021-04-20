@@ -1,0 +1,87 @@
+---
+    - name: waiting to connect...
+      wait_for_connection:
+        delay: 20
+        timeout: 300
+
+    - name: "installing docker"
+      package:
+        name: docker
+        state: present
+
+    - name: "starting docker"
+      service:
+        name: "docker"
+        state: started
+        enabled: yes
+
+    - name: "setting up yum for kubernetes"
+      copy:
+        dest: /etc/yum.repos.d/kubernetes.repo
+        src: ../files/kubernetes.repo
+
+    - name: "installing kubelet and kubectl"
+      yum:
+        disable_excludes: kubernetes
+        name: "{{ item }}"
+        state: present
+      loop:
+        - kubelet
+        - kubectl
+        - kubeadm
+       
+    - name: "changing docker configurations"
+      copy:
+        src: "../files/daemon.json"
+        dest: "/etc/docker/daemon.json"
+      register: daemon
+
+    - name: "enforcing changes to docker"
+      service:
+        name: docker
+        state: restarted
+      when: daemon.changed
+   
+    - name: "enabling kubelet"
+      service:
+        name: kubelet
+        state: started
+        enabled: yes
+
+    - name: "installing iproute-tc"
+      package:
+        name: iproute-tc
+        state: present
+
+    - name: "initiating kube cluster"
+      command: kubeadm init --pod-network-cidr "{{ kubernetes_network_cidr }}" --ignore-preflight-errors=NumCPU --ignore-preflight-errors=Mem --ignore-preflight-errors=FileContent--proc-sys-net-bridge-bridge-nf-call-iptables
+
+    - name: "dropping cache"
+      command: "echo 3 > /proc/sys/vm/drop_caches"
+
+    - name: "creating folder /home/ec2-user/.kube"
+      file:
+        state: directory
+        path: /home/ec2-user/.kube/
+        owner: ec2-user
+        group: ec2-user
+
+    - name: "copying config file"
+      command: cp -i /etc/kubernetes/admin.conf /home/ec2-user/.kube/config
+
+    - name: "changing owner of config file"
+      file:
+        state: file
+        path: /home/ec2-user/.kube/config
+        owner: ec2-user
+        group: ec2-user
+
+    - command: kubeadm token create --print-join-command
+      register: token_print
+
+
+    - name: "collecting token"
+      set_fact:
+        cacheable: yes
+        token: "{{ token_print.stdout }}"
+

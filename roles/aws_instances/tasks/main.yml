@@ -1,0 +1,22 @@
+    - name: Launch instance
+      amazon.aws.ec2:
+         key_name: "{{ keypair }}"
+         group: "{{ security_group }}"
+         instance_type: "{{ instance_type }}"
+         image: "{{ image }}"
+         wait: True
+         region: "{{ region }}"
+         count: "{{ count }}"
+         vpc_subnet_id: subnet-a2363fca
+         assign_public_ip: yes
+      register: ec2
+
+    - add_host:
+         name: "{{  ec2.instances[0].public_ip  }}"
+         groups: master
+
+    - add_host:
+         name: "{{ ec2.instances[item].public_ip }}"
+         groups: workers
+      loop: "{{ range(count) }}"
+      when: item>0

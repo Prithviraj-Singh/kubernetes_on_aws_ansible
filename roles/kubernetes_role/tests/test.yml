@@ -1,0 +1,4 @@
+---
+- hosts: master
+  roles:
+    - /root/kubernetes_role

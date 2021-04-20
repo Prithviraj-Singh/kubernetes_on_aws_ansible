@@ -1,0 +1,20 @@
+---
+- hosts: localhost
+  remote_user: root
+  gather_facts: False
+  vars_files:
+    - ../vars/main.yml
+  roles:
+    - ../../aws_instances
+
+- hosts: master
+  gather_facts: False
+  remote_user: ec2-user
+  become: yes
+  become_user: root
+  become_method: sudo
+  vars_files: ../vars/main.yml
+  vars:
+    - ansible_ssh_private_key_file: /root/prithvi.pem
+  roles: 
+    - ../../kubernetes_role
