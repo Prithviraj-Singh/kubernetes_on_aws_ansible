@@ -22,8 +22,8 @@ Download the collection using the following command:
     #prints all the nodes, including master
 That's it!!!
 
-###### Additionally you can change the attributes of the cluster by changing the variable located inside /some/path/ansible_collections/prithviraj_singh/aws_kubernetes/roles/aws_instances/vars/main.yml, /some/path/ansible_collections/prithviraj_singh/aws_kubernetes/roles/worker_nodes/vars/main.yml and /some/path/ansible_collections/prithviraj_singh/aws_kubernetes/roles/kubernetes_role/vars/main.yml
-###### Note:-
+### Additionally you can change the attributes of the cluster by changing the variable located inside /some/path/ansible_collections/prithviraj_singh/aws_kubernetes/roles/aws_instances/vars/main.yml, /some/path/ansible_collections/prithviraj_singh/aws_kubernetes/roles/worker_nodes/vars/main.yml and /some/path/ansible_collections/prithviraj_singh/aws_kubernetes/roles/kubernetes_role/vars/main.yml
+### Note:-
 If you wish to change the EC2’s image, make sure to change the username for initial login to the provided user inside ansible_collection/prithvi_singh/aws_kubernetes/playbook.yml . Also, creating a master-node with RHEL-8 image doesn’t work (somehow, if you know the reason and fix for it please let me know).
 
 Please rate the collection, your feedbacks are very highly appreciated😁.
