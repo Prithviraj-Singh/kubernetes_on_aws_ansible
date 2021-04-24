@@ -11,6 +11,7 @@ Download the collection using the following command:
 6. Whatever is required for the package plugins specific for each system.
 7. Yum, on the ec2 instances
 8. AWS configured on your base system (Alternatively you can define and export environmental variables AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY, with the required value).
+9. Key with names key1 and key2 should not pre-exist on the account.
 
 ## How to use
 1. Install the collection using the command given above or if that does not work you will require to download the tarball of the collection from https://galaxy.ansible.com/prithviraj_singh/aws_kubernetes and then untar the tarball. You can also choose to give the path to install the collection using -p as an option for this.
