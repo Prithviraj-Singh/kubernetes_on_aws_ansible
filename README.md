@@ -28,9 +28,9 @@ you can change the attributes of the cluster by changing the variable located in
 ### Note:-
 If you wish to change the EC2’s image, make sure to change the username for initial login to the provided user inside ansible_collection/prithvi_singh/aws_kubrnetes/playbook.yml . Also, creating a master-node with RHEL-8 image doesn’t work (somehow, if you know the reason and fix for it please let me know).
 
-#####Consider checking these out:-
-https://prithvirajsingh1604.medium.com/spawn-a-kubernetes-multi-node-cluster-over-aws-with-ansible-collections-61661d6fccc0
-https://divya-kurothe.medium.com/
+##### Consider checking these out:-
+https://prithvirajsingh1604.medium.com/spawn-a-kubernetes-multi-node-cluster-over-aws-with-ansible-collections-61661d6fccc0 
+https://divya-kurothe.medium.com/ 
 Please rate the collection, your feedbacks are very highly appreciated😁.   
  *That's all!!!*    
  **You are awesome**
