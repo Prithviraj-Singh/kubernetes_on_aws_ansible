@@ -30,4 +30,5 @@ If you wish to change the EC2’s image, make sure to change the username for in
 Please rate the collection, your feedbacks are very highly appreciated😁.   
  *That's all!!!*    
  **You are awesome**
-### *Created by*: #### Prithviraj Singh <prithvirajsingh1604@gmail.com> and Divya Kurothe.
+### *Created by*:
+Prithviraj Singh <prithvirajsingh1604@gmail.com> and Divya Kurothe.
